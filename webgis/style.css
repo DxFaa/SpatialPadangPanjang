@@ -143,7 +143,8 @@ body {
     top: 0; left: 0; right: 0; bottom: 0;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
 }
@@ -151,6 +152,7 @@ body {
 .view-section.active {
     opacity: 1;
     pointer-events: auto;
+    transform: translateY(0);
 }
 
 .scrollable {
