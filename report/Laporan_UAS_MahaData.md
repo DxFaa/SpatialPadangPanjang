@@ -55,9 +55,9 @@ Berdasarkan *testing dataset* (123 titik atau 30% dari total 400 sampel populasi
   - False Positive (FP): 1
   - False Negative (FN): 1
 - **Accuracy (Akurasi):** 98.37%
-- **Precision (Consumers Accuracy):** 98.50%
-- **Recall (Producers Accuracy):** 98.50%
-- **F1-Score:** 98.50%
+- **Precision (Consumers Accuracy):** 98.51%
+- **Recall (Producers Accuracy):** 98.51%
+- **F1-Score:** 98.51%
 
 **Interpretasi:**
 Tingkat akurasi dan presisi yang mencapai 98% mengindikasikan bahwa model dapat sangat dipercaya saat mengklasifikasikan piksel sebagai vegetasi. Hanya terdapat 1 kesalahan False Positive dan 1 False Negative, menunjukkan bahwa model berhasil mengatasi variasi noise dengan sangat baik menggunakan 100 *trees*.
@@ -67,12 +67,12 @@ Tingkat akurasi dan presisi yang mencapai 98% mengindikasikan bahwa model dapat 
 ### 4. Hasil dan Analisis Perubahan
 Berdasarkan raster hasil klasifikasi biner, perubahan dihitung dengan metode *post-classification change detection*. Poligon vektor diekspor dan luasnya dihitung melalui sistem Google Earth Engine.
 
-- **Luas Total Kota Padang Panjang:** 2.102,88 Ha
+- **Luas Total Kota Padang Panjang:** 2.102,89 Ha
 - **Luas Target (Vegetasi) 2024:** 1.362,58 Ha
 - **Luas Target (Vegetasi) 2025:** 1.491,82 Ha
-- **Gain (Pertambahan Vegetasi):** 176,75 Ha
-- **Loss (Penyusutan Vegetasi):** 47,51 Ha
-- **Perubahan Bersih (Net Change):** +129,24 Ha (+9.48%)
+- **Gain (Pertambahan Vegetasi):** 176,76 Ha
+- **Loss (Penyusutan Vegetasi):** 47,52 Ha
+- **Perubahan Bersih (Net Change):** +129,24 Ha (+9.49%)
 
 **Pola Spasial:**
 Lokasi perubahan terbesar (Loss) umumnya terkonsentrasi di area perbatasan kota dan di sepanjang jalan arteri yang mengindikasikan adanya perluasan bangunan atau infrastruktur. Sementara (Gain) terpantau berupa sebaran acak kecil yang mengindikasikan pertumbuhan semak belukar liar di lahan yang tidak dikelola.
@@ -80,7 +80,7 @@ Lokasi perubahan terbesar (Loss) umumnya terkonsentrasi di area perbatasan kota 
 ---
 
 ### 5. Kesimpulan dan Keterbatasan
-- **Kesimpulan:** Model Random Forest berhasil memetakan vegetasi dengan akurasi yang memadai (di atas 90%). Analisis menunjukkan tren [pilih: penurunan/penambahan] luasan vegetasi di Kota Padang Panjang dalam kurun satu tahun.
+- **Kesimpulan:** Model Random Forest berhasil memetakan vegetasi dengan akurasi yang memadai (di atas 90%). Analisis menunjukkan tren penambahan luasan vegetasi di Kota Padang Panjang dalam kurun satu tahun.
 - **Keterbatasan:** Resolusi Sentinel-2 (10 meter) tidak ideal untuk membedakan vegetasi individual (seperti satu pohon di pekarangan rumah), sehingga pemetaan lebih mewakili hamparan kanopi besar. *Ground truth* juga sangat bergantung pada interpretasi visual yang mungkin memiliki tingkat bias manusia.
 
 ---
