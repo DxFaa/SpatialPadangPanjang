@@ -4,7 +4,7 @@ Repositori ini berisi hasil proyek akhir mata kuliah **Kapita Selekta Sistem Inf
 
 ## Anggota Kelompok
 1. **Daffa Pratama Putra** (NIM: 1232712004)
-2. **Mochammad Fadhillah Y.K.** (NIM: 1232712001)
+2. **Mochammad Fadhilah Y.K.** (NIM: 1232712001)
 
 ## Studi Kasus
 - **Kota/Wilayah:** Kota Padang Panjang, Sumatera Barat

@@ -25,6 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const map = L.map('map', { zoomControl: false }).setView([-0.4607, 100.4010], 13);
     L.control.zoom({ position: 'topright' }).addTo(map);
 
+    // Tambahkan Skala (Scale Control)
+    L.control.scale({ position: 'bottomleft', metric: true, imperial: false }).addTo(map);
+
+    // Tambahkan Arah Mata Angin (North Arrow)
+    const northArrow = L.control({ position: 'topright' });
+    northArrow.onAdd = function() {
+        const div = L.DomUtil.create('div', 'leaflet-control leaflet-bar');
+        div.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+        div.style.padding = '4px 6px';
+        div.style.textAlign = 'center';
+        div.innerHTML = `
+            <svg width="20" height="30" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg">
+                <text x="12" y="12" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e293b">N</text>
+                <path d="M12 14 L18 34 L12 29 L6 34 Z" fill="#1e293b"/>
+            </svg>
+        `;
+        return div;
+    };
+    northArrow.addTo(map);
+
     const basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap', subdomains: 'abcd', maxZoom: 20
     }).addTo(map);
