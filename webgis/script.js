@@ -270,6 +270,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeOutQuart'
+                    },
                     plugins: {
                         legend: { display: false },
                         tooltip: {
@@ -299,6 +303,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    animation: {
+                        duration: 1500,
+                        easing: 'easeOutQuart'
+                    },
                     plugins: {
                         legend: { position: 'bottom' },
                         tooltip: {
