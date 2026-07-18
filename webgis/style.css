@@ -29,10 +29,11 @@
 body {
     background-color: var(--bg-main);
     color: var(--text-main);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* ========================================= */
@@ -134,9 +135,10 @@ body {
 /* MAIN APP CONTAINER */
 /* ========================================= */
 .app-container {
-    flex: 1;
+    height: calc(100vh - 60px);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .view-section {
