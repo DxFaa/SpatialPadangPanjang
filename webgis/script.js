@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const TOTAL_CITY_AREA = 2102.88;
+    const TOTAL_CITY_AREA = 2102.89;
 
     // --- 1. Tab Navigation Logic ---
     const navTabs = document.querySelectorAll('.nav-tab');
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: {
                     labels: ['Gain (Bertambah)', 'Loss (Berkurang)'],
                     datasets: [{
-                        data: [176.75, 47.51],
+                        data: [176.76, 47.52],
                         backgroundColor: ['#3b82f6', '#f43f5e'],
                         borderWidth: 0,
                         hoverOffset: 4
