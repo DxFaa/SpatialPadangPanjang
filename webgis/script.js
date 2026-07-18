@@ -89,7 +89,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     async function initMapData() {
-        const dataPath = '../data/';
+        // Fungsi dinamis untuk mendapatkan URL root data yang kebal terhadap berbagai jenis deployment (Vercel / GitHub Pages)
+        const getBaseUrl = () => {
+            const path = window.location.pathname;
+            if (path.includes('/webgis')) {
+                return window.location.origin + path.substring(0, path.indexOf('/webgis')) + '/data/';
+            }
+            return '../data/'; // Fallback
+        };
+        const dataPath = getBaseUrl();
+        
         await Promise.all([
             loadGeoJSON(dataPath + 'UAS_PadangPanjang_BatasWilayah.geojson', 'Batas Wilayah', styles.batas, 500, 'batas'),
             loadGeoJSON(dataPath + 'UAS_PadangPanjang_Target2024.geojson', 'Vegetasi 2024', styles.target2024, 100, 'target2024'),
