@@ -448,3 +448,37 @@ body {
     text-shadow: none !important;
     line-height: 1.2 !important;
 }
+
+/* ========================================= */
+/* DISTRIBUTION CARDS (INSIGHT) */
+/* ========================================= */
+.distribution-card {
+    border-left: 4px solid;
+}
+.border-gain {
+    border-left-color: var(--t2024);
+    background: rgba(34, 197, 94, 0.04);
+}
+.border-loss {
+    border-left-color: var(--danger);
+    background: rgba(239, 68, 68, 0.04);
+}
+.custom-bullet-list {
+    list-style: none;
+    padding-left: 0;
+}
+.custom-bullet-list li {
+    position: relative;
+    padding-left: 16px;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+.custom-bullet-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--text-main);
+    font-weight: bold;
+}
+.d-block { display: block; }
