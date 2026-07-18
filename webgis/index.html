@@ -152,28 +152,13 @@
 
                 <!-- Bottom Panels (Brief Summary) -->
                 <div class="dashboard-bottom-row">
-                    <div class="bottom-card data-proses-card">
-                        <h3 class="section-title"><i class="fa-solid fa-database"></i> Data & Proses</h3>
-                        <div class="dp-content">
-                            <div class="dp-left">
-                                <div class="dp-row"><span>Sumber</span><span>: Sentinel-2 SR Harmonized</span></div>
-                                <div class="dp-row"><span>Periode</span><span>: 2024 & 2025</span></div>
-                                <div class="dp-row"><span>Split</span><span>: 70:30</span></div>
-                                <div class="dp-row"><span>Tree</span><span>: 100</span></div>
-                            </div>
-                            <div class="dp-divider"></div>
-                            <div class="dp-right">
-                                <div class="dp-flow">
-                                    <div class="dp-step"><i class="fa-solid fa-layer-group" style="color:#64748b"></i><span>Feature<br>Stack</span></div>
-                                    <i class="fa-solid fa-arrow-right dp-arrow"></i>
-                                    <div class="dp-step"><i class="fa-solid fa-location-dot" style="color:#64748b"></i><span>Ground<br>Truth</span></div>
-                                    <i class="fa-solid fa-arrow-right dp-arrow"></i>
-                                    <div class="dp-step"><i class="fa-solid fa-laptop-code" style="color:#64748b"></i><span>Data<br>Splitting</span></div>
-                                    <i class="fa-solid fa-arrow-right dp-arrow"></i>
-                                    <div class="dp-step"><i class="fa-solid fa-sitemap" style="color:#2563eb"></i><span>Random<br>Forest</span></div>
-                                </div>
-                            </div>
+                    <div class="bottom-card">
+                        <h3 class="section-title"><i class="fa-solid fa-database"></i> Data Singkat</h3>
+                        <div class="brief-text">
+                            <p><strong>Sentinel-2 SR Harmonized</strong></p>
+                            <p>Periode 2024 & 2025. Klasifikasi dengan Random Forest (100 Trees, Split 70:30).</p>
                         </div>
+                        <a href="#" class="btn-link" onclick="document.querySelector('[data-target=\'view-data\']').click()">Lihat Detail Flowchart <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                     <div class="bottom-card">
                         <h3 class="section-title"><i class="fa-solid fa-chart-line"></i> Evaluasi Singkat</h3>
