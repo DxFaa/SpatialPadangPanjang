@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const TOTAL_CITY_AREA = 2102.89;
+    let chartsInitialized = false;
 
     // --- 1. Tab Navigation Logic ---
     const navTabs = document.querySelectorAll('.nav-tab');
@@ -17,6 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (targetId === 'view-map' && map) {
                 setTimeout(() => map.invalidateSize(), 100);
+            }
+
+            if (targetId === 'view-insight' && !chartsInitialized) {
+                setTimeout(() => {
+                    initCharts();
+                    chartsInitialized = true;
+                }, 100);
             }
         });
     });
@@ -294,5 +302,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Init
     initMapData();
-    initCharts();
 });
