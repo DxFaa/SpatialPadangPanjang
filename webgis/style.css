@@ -347,9 +347,15 @@ body {
 .card-icon { width: 48px; height: 48px; background: #eff6ff; color: var(--primary); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 16px; }
 
 .clean-list { list-style: none; }
-.clean-list li { padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; color: #475569; }
+.clean-list li { padding: 12px 0; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; color: #475569; }
 .clean-list li:last-child { border-bottom: none; }
 .clean-list li strong { color: var(--text-main); display: inline-block; width: 180px; }
+
+/* Neatly Aligned Colons for List */
+.clean-list.align-colon li { display: flex; gap: 8px; }
+.clean-list.align-colon .cl-label { flex: 0 0 170px; font-weight: 600; color: var(--text-main); }
+.clean-list.align-colon .cl-colon { color: var(--text-main); font-weight: 600; }
+.clean-list.align-colon .cl-val { flex: 1; }
 .clean-list.with-icons li { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; }
 .clean-list.with-icons i { font-size: 1.25rem; margin-top: 2px; }
 .clean-list.with-icons strong { display: block; width: auto; margin-bottom: 4px; }
