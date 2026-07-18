@@ -49,6 +49,27 @@ document.addEventListener('DOMContentLoaded', () => {
         attribution: '&copy; OpenStreetMap', subdomains: 'abcd', maxZoom: 20
     }).addTo(map);
 
+    // Tambahkan Garis Grid Koordinat (Graticule)
+    L.latlngGraticule({
+        showLabel: true,
+        color: '#222',
+        weight: 0.8,
+        opacity: 0.4,
+        font: '12px Inter, sans-serif',
+        fontColor: '#1e293b',
+        dashArray: [4, 4],
+        zoomInterval: [
+            {start: 2, end: 3, interval: 30},
+            {start: 4, end: 4, interval: 10},
+            {start: 5, end: 7, interval: 5},
+            {start: 8, end: 10, interval: 1},
+            {start: 11, end: 12, interval: 0.1},
+            {start: 13, end: 13, interval: 0.05},
+            {start: 14, end: 15, interval: 0.02},
+            {start: 16, end: 18, interval: 0.01}
+        ]
+    }).addTo(map);
+
     const styles = {
         batas: { color: '#1e293b', weight: 2, fillOpacity: 0, dashArray: '5, 5' },
         target2024: { color: '#22c55e', weight: 1, fillColor: '#22c55e', fillOpacity: 0.8 },
