@@ -6,8 +6,8 @@
 2. Mochammad Fadhillah Y.K. (NIM: 1232712001)
 
 **Tautan Penting:**
-- **Repositori GitHub:** [Tautan GitHub Publik]
-- **WebGIS:** [Tautan WebGIS]
+- **Repositori GitHub:** https://github.com/DxFaa/SpatialPadangPanjang
+- **WebGIS:** https://spatial-padang-panjang.vercel.app/
 
 ---
 
@@ -85,5 +85,5 @@ Lokasi perubahan terbesar (Loss) umumnya terkonsentrasi di area perbatasan kota 
 
 ---
 *Laporan Kontribusi Anggota:*
-- **Daffa Pratama Putra:** [Jelaskan Kontribusi (contoh: penyusunan code GEE, ground truth)]
-- **Mochammad Fadhillah Y.K.:** [Jelaskan Kontribusi (contoh: pembuatan WebGIS, penulisan laporan)]
+- **Daffa Pratama Putra:** Penyusunan Code Google Earth Engine; Ground Truth; Pengumpulan Sample Titik Point 100 per Target dan Non-Target; Github Repository; Frontend WebGIS; Backend WebGIS; Penyusunan Laporan; Konfigurasi Export GeoJSON di GEE;
+- **Mochammad Fadhillah Y.K.:** Frontend WebGIS; Backend WebGIS; Penyusunan Laporan
