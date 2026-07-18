@@ -525,9 +525,15 @@ body {
     }
 
     /* Tab 1: Map Hybrid Layout */
+    #view-map {
+        overflow-y: auto;
+    }
+    .dashboard-hybrid {
+        height: auto;
+    }
     .dashboard-top-row {
         flex-direction: column;
-        overflow-y: auto;
+        overflow-y: visible;
     }
     .map-wrapper {
         order: -1 !important;
