@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const TOTAL_CITY_AREA = 2102.89;
     let chartsInitialized = false;
+    let areaChartInstance = null;
+    let doughnutChartInstance = null;
 
     // --- 1. Tab Navigation Logic ---
     const navTabs = document.querySelectorAll('.nav-tab');
@@ -20,11 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => map.invalidateSize(), 100);
             }
 
-            if (targetId === 'view-insight' && !chartsInitialized) {
+            if (targetId === 'view-insight') {
                 setTimeout(() => {
-                    initCharts();
-                    chartsInitialized = true;
-                }, 100);
+                    if (!chartsInitialized) {
+                        initCharts();
+                        chartsInitialized = true;
+                    } else {
+                        if (areaChartInstance) {
+                            areaChartInstance.reset();
+                            areaChartInstance.update();
+                        }
+                        if (doughnutChartInstance) {
+                            doughnutChartInstance.reset();
+                            doughnutChartInstance.update();
+                        }
+                    }
+                }, 300); // Wait for tab slide-up animation to almost finish before starting chart animation
             }
         });
     });
@@ -243,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function initCharts() {
         const areaCtx = document.getElementById('areaChart');
         if(areaCtx) {
-            new Chart(areaCtx, {
+            areaChartInstance = new Chart(areaCtx, {
                 type: 'bar',
                 data: {
                     labels: ['2024', '2025'],
@@ -272,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const doughnutCtx = document.getElementById('doughnutChart');
         if(doughnutCtx) {
-            new Chart(doughnutCtx, {
+            doughnutChartInstance = new Chart(doughnutCtx, {
                 type: 'doughnut',
                 data: {
                     labels: ['Gain (Bertambah)', 'Loss (Berkurang)'],
