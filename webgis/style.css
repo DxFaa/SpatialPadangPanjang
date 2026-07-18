@@ -519,19 +519,27 @@ body {
 
     /* Tab 1: Map Hybrid Layout */
     .dashboard-top-row {
-        flex-direction: column-reverse;
-    }
-    .sidebar {
-        width: 100%;
-        height: auto;
-        max-height: 40%;
-        border-right: none;
-        border-top: 1px solid var(--border-color);
-        padding: 16px;
+        flex-direction: column;
+        overflow-y: auto;
     }
     .map-wrapper {
-        height: 60%;
-        min-height: 60%;
+        order: 1;
+        width: 100%;
+        height: 50vh;
+        min-height: 50vh;
+        flex: none;
+    }
+    .map-sidebar.left {
+        order: 2;
+    }
+    .map-sidebar.right {
+        order: 3;
+    }
+    .map-sidebar {
+        width: 100%;
+        height: auto;
+        border: none;
+        padding: 0;
     }
 
     /* Grids & Cards */
