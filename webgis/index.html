@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGIS - Perubahan Vegetasi Padang Panjang</title>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Turf.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <div class="logo-icon"><i class="fa-solid fa-leaf"></i></div>
+            <div class="brand-text">
+                <h1>Vegetasi Padang Panjang</h1>
+                <p>UAS Kapita Selekta SI & Maha Data</p>
+            </div>
+        </div>
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-target="view-map"><i class="fa-solid fa-map"></i> Peta Hasil</button>
+            <button class="nav-tab" data-target="view-data"><i class="fa-solid fa-database"></i> Data & Proses</button>
+            <button class="nav-tab" data-target="view-eval"><i class="fa-solid fa-chart-pie"></i> Evaluasi Model</button>
+            <button class="nav-tab" data-target="view-insight"><i class="fa-regular fa-lightbulb"></i> Insight Hasil</button>
+        </nav>
+        <div class="nav-user">
+            <div class="avatar"><i class="fa-solid fa-user-group"></i></div>
+            <span>Daffa & Fadhillah</span>
+        </div>
+    </header>
+
+    <!-- Main Application Area -->
+    <main class="app-container">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: PETA HASIL (DASHBOARD HYBRID) -->
+        <!-- ========================================== -->
+        <section id="view-map" class="view-section active">
+            <div class="dashboard-hybrid">
+                <div class="dashboard-top-row">
+                    <!-- Left Panel: Controls -->
+                    <aside class="map-sidebar left">
+                        <div class="panel-card flex-col h-full">
+                            <h3 class="panel-title"><i class="fa-solid fa-layer-group"></i> Layer Control</h3>
+                            <div class="layer-controls">
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="cb-basemap" checked>
+                                    <span class="checkmark"></span>
+                                    Basemap (OSM)
+                                </label>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="cb-batas" checked>
+                                    <span class="checkmark"></span>
+                                    Batas Kota
+                                </label>
+                                <div class="divider"></div>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="cb-target2024" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="color-indicator t2024"></span> Target 2024
+                                </label>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="cb-target2025" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="color-indicator t2025"></span> Target 2025
+                                </label>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="cb-gain" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="color-indicator gain"></span> Bertambah (Gain)
+                                </label>
+                                <label class="custom-checkbox">
+                                    <input type="checkbox" id="cb-loss" checked>
+                                    <span class="checkmark"></span>
+                                    <span class="color-indicator loss"></span> Berkurang (Loss)
+                                </label>
+                            </div>
+                            
+                            <div class="opacity-wrapper mt-auto">
+                                <label for="opacity-slider">Opacity Layer Poligon</label>
+                                <input type="range" id="opacity-slider" class="styled-slider" min="0" max="100" value="80">
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Center: Map -->
+                    <div class="map-wrapper">
+                        <div class="map-header-floating">
+                            <h2>Peta Perubahan Vegetasi Kota Padang Panjang</h2>
+                        </div>
+                        <div id="map"></div>
+                    </div>
+
+                    <!-- Right Panel: Quick Stats -->
+                    <aside class="map-sidebar right">
+                        <div class="panel-card flex-col h-full">
+                            <h3 class="panel-title"><i class="fa-solid fa-chart-simple"></i> Ringkasan Hasil</h3>
+                            <div class="stat-list">
+                                <div class="stat-item">
+                                    <span class="stat-label">Total Luas Kota</span>
+                                    <span class="stat-val">2.102,88 ha</span>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="stat-item">
+                                    <span class="stat-label"><i class="fa-solid fa-circle text-t2024"></i> Vegetasi 2024</span>
+                                    <span class="stat-val">1.362,58 ha</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label"><i class="fa-solid fa-circle text-t2025"></i> Vegetasi 2025</span>
+                                    <span class="stat-val">1.491,82 ha</span>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="stat-item">
+                                    <span class="stat-label"><i class="fa-solid fa-arrow-trend-up text-gain"></i> Bertambah</span>
+                                    <span class="stat-val text-gain">+176,75 ha</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label"><i class="fa-solid fa-arrow-trend-down text-loss"></i> Berkurang</span>
+                                    <span class="stat-val text-loss">-47,51 ha</span>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="stat-item highlight">
+                                    <span class="stat-label">Perubahan Bersih</span>
+                                    <div class="stat-group">
+                                        <span class="stat-val text-gain">+129,24 ha</span>
+                                        <span class="stat-sub text-gain">(+9.48%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- Bottom Panels (Brief Summary) -->
+                <div class="dashboard-bottom-row">
+                    <div class="bottom-card">
+                        <h3 class="section-title"><i class="fa-solid fa-database"></i> Data Singkat</h3>
+                        <div class="brief-text">
+                            <p><strong>Sentinel-2 SR Harmonized</strong></p>
+                            <p>Periode 2024 & 2025. Klasifikasi dengan Random Forest (100 Trees, Split 70:30).</p>
+                        </div>
+                        <a href="#" class="btn-link" onclick="document.querySelector('[data-target=\'view-data\']').click()">Lihat Detail Flowchart <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="bottom-card">
+                        <h3 class="section-title"><i class="fa-solid fa-chart-line"></i> Evaluasi Singkat</h3>
+                        <div class="brief-stats">
+                            <div><span>Akurasi:</span> <strong>98.37%</strong></div>
+                            <div><span>F1-Score:</span> <strong>98.50%</strong></div>
+                        </div>
+                        <a href="#" class="btn-link" onclick="document.querySelector('[data-target=\'view-eval\']').click()">Lihat Confusion Matrix <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="bottom-card">
+                        <h3 class="section-title"><i class="fa-regular fa-lightbulb"></i> Insight Singkat</h3>
+                        <ul class="brief-list">
+                            <li><i class="fa-solid fa-arrow-trend-up text-gain"></i> Tren Vegetasi Positif</li>
+                            <li><i class="fa-solid fa-location-crosshairs text-primary"></i> Target RTH Terpantau</li>
+                        </ul>
+                        <a href="#" class="btn-link" onclick="document.querySelector('[data-target=\'view-insight\']').click()">Lihat Grafik & Analisis <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: DATA & PROSES -->
+        <!-- ========================================== -->
+        <section id="view-data" class="view-section scrollable">
+            <div class="page-content">
+                <div class="page-header">
+                    <h2>Data & Preprocessing Spasial</h2>
+                    <p>Metodologi pengolahan citra satelit dilakukan secara konsisten melalui <em>Google Earth Engine</em> untuk memastikan perbandingan yang setara antara tahun 2024 dan 2025.</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="content-card">
+                        <div class="card-icon"><i class="fa-solid fa-satellite"></i></div>
+                        <h3>Sumber Data</h3>
+                        <ul class="clean-list">
+                            <li><strong>Satelit:</strong> Sentinel-2 (Multispectral Instrument)</li>
+                            <li><strong>Koleksi:</strong> Surface Reflectance Harmonized (Level-2A)</li>
+                            <li><strong>Resolusi Spasial:</strong> 10 Meter</li>
+                            <li><strong>Batas Wilayah:</strong> geoBoundaries (Level ADM2) Kota Padang Panjang</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <div class="card-icon"><i class="fa-solid fa-cloud-sun"></i></div>
+                        <h3>Parameter Komposit</h3>
+                        <ul class="clean-list">
+                            <li><strong>Periode Akuisisi:</strong> 1 Jan - 31 Des (Untuk 2024 dan 2025)</li>
+                            <li><strong>Batas Awan Maksimum:</strong> &lt; 70% per scene</li>
+                            <li><strong>Algoritma Cloud Masking:</strong> QA60 Bitmask (Cloud & Cirrus)</li>
+                            <li><strong>Metode Reducer:</strong> Median (Bebas Awan)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="content-card full-width mt-4">
+                    <h3>Workflow Klasifikasi</h3>
+                    <div class="flowchart">
+                        <div class="flow-node">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span>Feature Stack<br><small>B2, B3, B4, B8, B11, B12, NDVI</small></span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-node">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span>Ground Truth<br><small>400 Sampel (Kelas 0 & 1)</small></span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-node">
+                            <i class="fa-solid fa-laptop-code"></i>
+                            <span>Data Splitting<br><small>70% Train, 30% Test (Seed 42)</small></span>
+                        </div>
+                        <i class="fa-solid fa-arrow-right flow-arrow"></i>
+                        <div class="flow-node primary-node">
+                            <i class="fa-solid fa-network-wired"></i>
+                            <span>Random Forest<br><small>100 Trees</small></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: EVALUASI MODEL (INTERAKTIF) -->
+        <!-- ========================================== -->
+        <section id="view-eval" class="view-section scrollable">
+            <div class="page-content">
+                <div class="page-header">
+                    <h2>Kinerja Model Random Forest</h2>
+                    <p>Evaluasi metrik APRF berdasarkan 123 sampel Testing Data (30% dari total 400 sampel).</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card" id="card-acc">
+                        <div class="metric-title">Accuracy</div>
+                        <div class="metric-value text-primary">98.37%</div>
+                        <div class="metric-desc">Tingkat akurasi keseluruhan</div>
+                    </div>
+                    <div class="metric-card" id="card-prec">
+                        <div class="metric-title">Precision (Class 1)</div>
+                        <div class="metric-value text-success">98.50%</div>
+                        <div class="metric-desc">Consumer's Accuracy</div>
+                    </div>
+                    <div class="metric-card" id="card-rec">
+                        <div class="metric-title">Recall (Class 1)</div>
+                        <div class="metric-value text-warning">98.50%</div>
+                        <div class="metric-desc">Producer's Accuracy</div>
+                    </div>
+                    <div class="metric-card" id="card-f1">
+                        <div class="metric-title">F1-Score</div>
+                        <div class="metric-value text-danger">98.50%</div>
+                        <div class="metric-desc">Keseimbangan Model</div>
+                    </div>
+                </div>
+
+                <div class="grid-2 mt-4">
+                    <div class="content-card">
+                        <h3>Confusion Matrix Interaktif</h3>
+                        <p class="text-sm text-muted mb-2">Arahkan kursor (*hover*) pada sel tabel di bawah untuk melihat interpretasinya.</p>
+                        <table class="styled-table cm-interactive mt-3">
+                            <thead>
+                                <tr>
+                                    <th>Aktual \ Prediksi</th>
+                                    <th>Non-Vegetasi (0)</th>
+                                    <th>Vegetasi (1)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Non-Vegetasi (0)</strong></td>
+                                    <td class="cm-cell cell-tn" data-tooltip="True Negative (55): Area yang benar ditebak sebagai Non-Vegetasi.">55 (TN)</td>
+                                    <td class="cm-cell cell-fp" data-tooltip="False Positive (1): Area Non-Vegetasi ditebak salah sebagai Vegetasi. Mempengaruhi Presisi.">1 (FP)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Vegetasi (1)</strong></td>
+                                    <td class="cm-cell cell-fn" data-tooltip="False Negative (1): Area Vegetasi ditebak salah sebagai Non-Vegetasi. Mempengaruhi Recall.">1 (FN)</td>
+                                    <td class="cm-cell cell-tp" data-tooltip="True Positive (66): Area yang benar ditebak sebagai Vegetasi.">66 (TP)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="content-card" id="cm-explanation">
+                        <h3>Interpretasi Langsung</h3>
+                        <div class="interpretation-box mt-2 default-msg">
+                            <i class="fa-solid fa-arrow-pointer text-muted" style="font-size: 2rem; margin-bottom:10px; display:block;"></i>
+                            <p>Silakan arahkan kursor Anda ke angka di dalam tabel Confusion Matrix untuk memunculkan penjelasan mendetail di sini.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: INSIGHT HASIL (CHART.JS) -->
+        <!-- ========================================== -->
+        <section id="view-insight" class="view-section scrollable">
+            <div class="page-content">
+                <div class="page-header">
+                    <h2>Insight & Grafik Interaktif</h2>
+                    <p>Membahas distribusi keruangan dan perubahan luasan target vegetasi di Padang Panjang melalui visualisasi data.</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="content-card">
+                        <h3>Perbandingan Luasan (Hektar)</h3>
+                        <div class="chart-container mt-3" style="position: relative; height:250px; width:100%">
+                            <canvas id="areaChart"></canvas>
+                        </div>
+                        <div class="summary-box mt-4">
+                            Secara keseluruhan, wilayah tutupan vegetasi di Padang Panjang mengalami <strong>PERTAMBAHAN</strong> bersih sebesar <strong>129,24 Ha</strong> (+9.48%).
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <h3>Dinamika Perubahan (Gain vs Loss)</h3>
+                        <div class="chart-container mt-3" style="position: relative; height:250px; width:100%">
+                            <canvas id="doughnutChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-card full-width mt-4">
+                    <h3>Rekomendasi & Penggunaan</h3>
+                    <ul class="clean-list with-icons mt-3">
+                        <li>
+                            <i class="fa-solid fa-location-dot text-primary"></i>
+                            <div>
+                                <strong>Lokasi Perubahan:</strong>
+                                <p>Penambahan (Gain) tersebar di area lahan terbuka yang mulai ditumbuhi vegetasi alami, sedangkan Penyusutan (Loss) berfokus pada titik-titik pembangunan infrastruktur baru.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-building-circle-check text-success"></i>
+                            <div>
+                                <strong>Potensi Penggunaan:</strong>
+                                <p>Dapat digunakan oleh Dinas Lingkungan Hidup (DLH) Kota Padang Panjang untuk memvalidasi pencapaian target Ruang Terbuka Hijau (RTH) kota secara berkala tanpa survei darat penuh.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+</html>
