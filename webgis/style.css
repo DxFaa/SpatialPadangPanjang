@@ -550,7 +550,10 @@ body {
         padding: 0;
     }
     .dashboard-bottom-row {
-        display: none; /* Hide shortcuts on mobile to save space */
+        display: grid;
+        grid-template-columns: 1fr;
+        height: auto; /* Remove the 160px fixed height so cards can stack naturally */
+        gap: 12px;
     }
 
     /* Grids & Cards */
