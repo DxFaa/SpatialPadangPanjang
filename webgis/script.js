@@ -39,6 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }, 300); // Wait for tab slide-up animation to almost finish before starting chart animation
             }
+
+            if (targetId === 'view-eval') {
+                setTimeout(() => runCounters(), 300);
+            }
         });
     });
 
@@ -213,6 +217,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. Confusion Matrix Interactive Logic ---
     const cmCells = document.querySelectorAll('.cm-cell');
     const explBox = document.querySelector('.interpretation-box');
+    
+    // --- Counter Animation ---
+    function runCounters() {
+        const counters = document.querySelectorAll('.count-up');
+        counters.forEach(counter => {
+            const target = +counter.getAttribute('data-target');
+            counter.innerText = '0%';
+            
+            const duration = 1200; // ms
+            const stepTime = 20; // ms
+            const steps = duration / stepTime;
+            const increment = target / steps;
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                counter.innerText = current.toFixed(2) + '%';
+            }, stepTime);
+        });
+    }
     
     // Mapping specific cards to highlight
     const cardMap = {
