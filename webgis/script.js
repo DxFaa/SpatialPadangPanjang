@@ -49,6 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
         attribution: '&copy; OpenStreetMap', subdomains: 'abcd', maxZoom: 20
     }).addTo(map);
 
+    // Format Coordinate Decimal to DMS (Degrees, Minutes, Seconds)
+    function formatDMS(val, isLat) {
+        const absVal = Math.abs(val);
+        const deg = Math.floor(absVal);
+        const minFloat = (absVal - deg) * 60;
+        const min = Math.floor(minFloat);
+        const sec = Math.round((minFloat - min) * 60);
+        const dir = isLat ? (val >= 0 ? 'N' : 'S') : (val >= 0 ? 'E' : 'W');
+        return `${deg}°${min}'${sec}"${dir}`;
+    }
+
     // Tambahkan Garis Grid Koordinat (Graticule)
     L.latlngGraticule({
         showLabel: true,
@@ -58,6 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
         font: '12px Inter, sans-serif',
         fontColor: '#1e293b',
         dashArray: [4, 4],
+        lngFormatTickLabel: function(lng) { return formatDMS(lng, false); },
+        latFormatTickLabel: function(lat) { return formatDMS(lat, true); },
         zoomInterval: [
             {start: 2, end: 3, interval: 30},
             {start: 4, end: 4, interval: 10},
