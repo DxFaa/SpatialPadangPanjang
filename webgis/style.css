@@ -518,7 +518,7 @@ body {
     }
 
     /* Tab 1: Map Hybrid Layout */
-    .dashboard-hybrid {
+    .dashboard-top-row {
         flex-direction: column-reverse;
     }
     .sidebar {
