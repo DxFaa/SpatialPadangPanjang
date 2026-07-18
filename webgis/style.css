@@ -320,6 +320,10 @@ body {
 }
 .section-title { font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
 .brief-text, .brief-stats, .brief-list { flex: 1; font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+.brief-list-table { flex: 1; display: flex; flex-direction: column; gap: 5px; font-size: 0.85rem; color: var(--text-main); font-weight: 500; line-height: 1.4; }
+.list-row { display: flex; gap: 4px; }
+.list-row span:first-child { width: 55px; font-weight: 600; color: var(--text-main); }
+.list-row span:last-child { flex: 1; color: var(--text-muted); }
 .brief-stats div { display: flex; justify-content: space-between; margin-bottom: 4px; border-bottom: 1px dashed #eee; padding-bottom: 4px;}
 .brief-stats strong { color: var(--text-main); }
 .brief-list { list-style: none; }
