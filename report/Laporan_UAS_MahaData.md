@@ -3,7 +3,7 @@
 
 **Oleh:**
 1. Daffa Pratama Putra (NIM: 1232712004)
-2. Mochammad Fadhillah Y.K. (NIM: 1232712001)
+2. Mochammad Fadhilah Y.K. (NIM: 1232712001)
 
 **Tautan Penting:**
 - **Repositori GitHub:** https://github.com/DxFaa/SpatialPadangPanjang
@@ -86,4 +86,4 @@ Lokasi perubahan terbesar (Loss) umumnya terkonsentrasi di area perbatasan kota 
 ---
 *Laporan Kontribusi Anggota:*
 - **Daffa Pratama Putra:** Penyusunan Code Google Earth Engine; Ground Truth; Pengumpulan Sample Titik Point 100 per Target dan Non-Target; Github Repository; Frontend WebGIS; Backend WebGIS; Penyusunan Laporan; Konfigurasi Export GeoJSON di GEE;
-- **Mochammad Fadhillah Y.K.:** Frontend WebGIS; Backend WebGIS; Penyusunan Laporan
+- **Mochammad Fadhilah Y.K.:** Frontend WebGIS; Backend WebGIS; Penyusunan Laporan
