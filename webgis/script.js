@@ -195,7 +195,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => ` ${ctx.parsed.y.toLocaleString('id-ID', {minimumFractionDigits:2, maximumFractionDigits:2})} Ha`
+                            }
+                        }
+                    },
                     scales: { y: { beginAtZero: true, grid: { borderDash: [2, 4] } } }
                 }
             });
@@ -218,7 +225,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom' }
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => ` ${ctx.label}: ${ctx.parsed.toLocaleString('id-ID', {minimumFractionDigits:2, maximumFractionDigits:2})} Ha`
+                            }
+                        }
                     },
                     cutout: '70%'
                 }
