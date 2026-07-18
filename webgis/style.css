@@ -560,6 +560,7 @@ body {
         grid-template-columns: 1fr;
         height: auto; /* Remove the 160px fixed height so cards can stack naturally */
         gap: 12px;
+        padding-bottom: 24px;
     }
 
     /* Grids & Cards */
